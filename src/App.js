@@ -12,11 +12,20 @@ function App() {
       if (!isInteracted) {
         setIsInteracted(true);
         window.removeEventListener('mousemove', handleFirstInteraction);
+        window.removeEventListener('touchstart', handleFirstInteraction);
+        window.removeEventListener('touchmove', handleFirstInteraction);
       }
     };
 
     window.addEventListener('mousemove', handleFirstInteraction);
-    return () => window.removeEventListener('mousemove', handleFirstInteraction);
+    window.addEventListener('touchstart', handleFirstInteraction, { passive: true });
+    window.addEventListener('touchmove', handleFirstInteraction, { passive: true });
+
+    return () => {
+      window.removeEventListener('mousemove', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+      window.removeEventListener('touchmove', handleFirstInteraction);
+    };
   }, [isInteracted]);
 
 
