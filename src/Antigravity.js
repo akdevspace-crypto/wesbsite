@@ -42,10 +42,17 @@ const Antigravity = ({
 
         const handleResize = () => init();
 
-        // Track mouse anywhere on the window
+        // Track mouse and touch anywhere on the window
         const handleMouseMove = (e) => {
             mx = e.clientX;
             my = e.clientY;
+        };
+
+        const handleTouchMove = (e) => {
+            if (e.touches && e.touches.length > 0) {
+                mx = e.touches[0].clientX;
+                my = e.touches[0].clientY;
+            }
         };
 
         const handleMouseLeave = () => {
@@ -55,7 +62,11 @@ const Antigravity = ({
 
         window.addEventListener('resize', handleResize);
         window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('touchstart', handleTouchMove, { passive: true });
+        window.addEventListener('touchmove', handleTouchMove, { passive: true });
         document.addEventListener('mouseleave', handleMouseLeave);
+        document.addEventListener('touchend', handleMouseLeave);
+        document.addEventListener('touchcancel', handleMouseLeave);
 
         init();
 
@@ -90,7 +101,11 @@ const Antigravity = ({
         return () => {
             window.removeEventListener('resize', handleResize);
             window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('touchstart', handleTouchMove);
+            window.removeEventListener('touchmove', handleTouchMove);
             document.removeEventListener('mouseleave', handleMouseLeave);
+            document.removeEventListener('touchend', handleMouseLeave);
+            document.removeEventListener('touchcancel', handleMouseLeave);
             cancelAnimationFrame(animationFrameId);
         };
     }, [
