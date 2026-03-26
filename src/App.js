@@ -70,7 +70,7 @@ function App() {
       {/* 2. Base Dark Layer (Ensures completely hidden mask outside cursor) */}
       <div className="fixed inset-0 bg-black z-0 pointer-events-none" />
 
-      <main className="relative w-full max-w-4xl flex flex-col items-center z-10 text-center space-y-12 py-20">
+      <main className="relative w-full max-w-4xl flex flex-col items-center z-10 text-center space-y-6 md:space-y-12 py-12 md:py-20">
 
         {/* Header / Logo */}
         <motion.div
@@ -85,10 +85,10 @@ function App() {
             className="w-[110px] h-[110px] md:w-[130px] md:h-[130px]"
           />
           <div className="flex flex-col items-center">
-            <h3 className="text-white font-orbitron tracking-[0.1em] md:tracking-[0.1em] text-4xl md:text-5xl font-bold uppercase mt-2">
+            <h3 className="text-white font-orbitron tracking-[0.1em] md:tracking-[0.1em] text-3xl md:text-5xl font-bold uppercase mt-2">
               ARTIBOTS
             </h3>
-            <h2 className="text-neon-blue font-orbitron tracking-futuristic text-xl md:text-2xl font-semibold uppercase mt-10">
+            <h2 className="text-neon-blue font-orbitron tracking-futuristic text-lg md:text-2xl font-semibold uppercase mt-4 md:mt-10">
               is
             </h2>
           </div>
@@ -100,7 +100,7 @@ function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.3 }}
-            className="text-4xl md:text-5xl font-black text-white uppercase mt-0"
+            className="text-3xl md:text-5xl font-black text-white uppercase mt-0"
           >
             About to Awaken
           </motion.h1>
@@ -122,11 +122,11 @@ function App() {
       </main >
 
       {/* Footer */}
-      < footer className="absolute bottom-8 left-0 w-full text-center z-10 px-4" >
-        <p className="text-white/60 text-sm md:text-base tracking-widest uppercase">
+      <footer className="absolute bottom-4 md:bottom-8 left-0 w-full text-center z-10 px-4">
+        <p className="text-white/60 text-xs md:text-base tracking-widest uppercase">
           © 2025 Artibots Innovation Private Limited
         </p>
-      </footer >
+      </footer>
 
     </div >
   );
