@@ -55,9 +55,7 @@ const Home = ({ isInteracted, isRevealed, handleRevealInitiation }) => {
                             <h1 className="text-white font-orbitron tracking-[0.1em] md:tracking-[0.1em] text-3xl md:text-5xl font-bold uppercase mt-2">
                                 ARTIBOTS
                             </h1>
-                            <h2 className="text-neon-blue font-orbitron tracking-futuristic text-lg md:text-2xl font-semibold uppercase mt-4 md:mt-10">
-                                AI & Robotics
-                            </h2>
+                            
                         </div>
                     </motion.div>
                 </header>
@@ -81,7 +79,7 @@ const Home = ({ isInteracted, isRevealed, handleRevealInitiation }) => {
                         <span className="font-bold text-silver-white">ARTIBOTS</span>, a next-generation platform developed by {" "}
                         <span className="text-white font-semibold">
                             Artibots Innovation Private Limited
-                        </span>, is the engine behind the intelligence. We are building an innovative future in automation and intelligent systems.
+                        </span>, is the engine behind the intelligence. We are building an innovative future.
                     </motion.p>
                 </section>
             </main>
