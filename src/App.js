@@ -1,11 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
-import Antigravity from './Antigravity';
 
-function App() {
+import Home from './pages/Home';
+
+
+const Nav = () => {
+  const location = useLocation();
+  const isActive = (path) => location.pathname === path;
+
+
+};
+
+const Footer = () => (
+  <footer className="absolute bottom-4 md:bottom-8 left-0 w-full text-center z-10 px-4 space-y-2">
+    {/* <p className="text-white/60 text-[10px] md:text-sm tracking-widest uppercase max-w-2xl mx-auto leading-relaxed">
+      ARTIBOTS is an Artificial Intelligence and Robotics company that develops intelligent systems, automation platforms, and advanced robotics technologies.
+    </p>*/}
+    <p className="text-white/30 text-[9px] md:text-xs tracking-widest uppercase">
+      © 2025 ARTIBOTS INNOVATION PRIVATE LIMITED | Founded by ARUN JETLY | www.artibots.in
+    </p>
+  </footer>
+);
+
+function AppContent() {
   const [isInteracted, setIsInteracted] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
+  const lastTapTime = useRef(0);
 
   useEffect(() => {
     const handleFirstInteraction = () => {
@@ -24,111 +46,44 @@ function App() {
     };
   }, [isInteracted]);
 
-
-
-  const handleGlobalClick = () => {
+  const handleRevealInitiation = (e) => {
     if (isRevealed) return;
-    setIsRevealed(true);
-    setTimeout(() => {
-      setIsRevealed(false);
-    }, 5000);
+    const now = Date.now();
+    const DOUBLE_TAP_DELAY = 300;
+    if (e.type === 'dblclick' || (now - lastTapTime.current < DOUBLE_TAP_DELAY)) {
+      setIsRevealed(true);
+      setTimeout(() => setIsRevealed(false), 5000);
+    }
+    lastTapTime.current = now;
   };
 
   return (
-    <div
-      className="fixed inset-0 bg-black flex flex-col items-center justify-center overflow-hidden px-4 selection:bg-neon-blue selection:text-white touch-none"
-      onClick={handleGlobalClick}
-    >
+    <div className="fixed inset-0 bg-black flex flex-col items-center justify-center overflow-hidden selection:bg-neon-blue selection:text-white touch-none">
+      <Nav />
 
-      {/* Glassmorphism Initial State Screen */}
-      <div
-        className={`fixed inset-0 z-[60] bg-[#1a1a1a]/20 backdrop-blur-[30px] pointer-events-none transition-all duration-1000 ease-in-out ${isInteracted ? 'opacity-0' : 'opacity-100'
-          }`}
-      />
+      <AnimatePresence mode="wait">
+        <Routes>
+          <Route path="/" element={
+            <Home
+              isInteracted={isInteracted}
+              isRevealed={isRevealed}
+              handleRevealInitiation={handleRevealInitiation}
+            />
+          } />
 
-      {/* 1. Antigravity Foreground Reveal / Masking System */}
-      <div className={`absolute inset-0 z-50 pointer-events-none transition-opacity duration-700 ease-in-out ${isRevealed ? 'opacity-0' : 'opacity-100'}`}>
-        <Antigravity
-          count={10000}
-          magnetRadius={160}
-          ringRadius={175}
-          waveSpeed={0.8}
-          waveAmplitude={1.5}
-          particleSize={2.2}
-          lerpSpeed={0.05}
-          color="#c9c9c9"
-          autoAnimate
-          particleVariance={0.4}
-          rotationSpeed={0}
-          depthFactor={1.5}
-          pulseSpeed={1.5}
-          particleShape="circle"
-          fieldStrength={55}
-        />
-      </div>
+        </Routes>
+      </AnimatePresence>
 
-      {/* 2. Base Dark Layer (Ensures completely hidden mask outside cursor) */}
-      <div className="fixed inset-0 bg-black z-0 pointer-events-none" />
+      <Footer />
+    </div>
+  );
+}
 
-      <main className="relative w-full max-w-4xl flex flex-col items-center z-10 text-center space-y-6 md:space-y-12 py-12 md:py-20">
-
-        {/* Header / Logo */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2 }}
-          className="flex flex-col items-center space-y-6"
-        >
-          <img
-            src="/logo.png"
-            alt="ARTIBOTS Logo"
-            className="w-[110px] h-[110px] md:w-[130px] md:h-[130px]"
-          />
-          <div className="flex flex-col items-center">
-            <h3 className="text-white font-orbitron tracking-[0.1em] md:tracking-[0.1em] text-3xl md:text-5xl font-bold uppercase mt-2">
-              ARTIBOTS
-            </h3>
-            <h2 className="text-neon-blue font-orbitron tracking-futuristic text-lg md:text-2xl font-semibold uppercase mt-4 md:mt-10">
-              is
-            </h2>
-          </div>
-        </motion.div>
-
-        {/* Content */}
-        <div className="space-y-6 max-w-2xl">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.3 }}
-            className="text-3xl md:text-5xl font-black text-white uppercase mt-0"
-          >
-            About to Awaken
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.5, delay: 0.6 }}
-            className="text-white/70 text-sm md:text-base leading-relaxed tracking-wide"
-          >
-            <span className="font-bold text-white">Artibots</span>, a next-generation platform developed by {" "}
-            <span className="text-white font-semibold">
-              Artibots Innovation Private Limited
-            </span>, is the engine behind the intelligence. We are building an innovative future.
-          </motion.p>
-        </div>
-
-
-      </main >
-
-      {/* Footer */}
-      <footer className="absolute bottom-4 md:bottom-8 left-0 w-full text-center z-10 px-4">
-        <p className="text-white/60 text-xs md:text-base tracking-widest uppercase">
-          © 2025 Artibots Innovation Private Limited
-        </p>
-      </footer>
-
-    </div >
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 }
 
