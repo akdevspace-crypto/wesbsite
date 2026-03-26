@@ -48,13 +48,24 @@ function AppContent() {
 
   const handleRevealInitiation = (e) => {
     if (isRevealed) return;
-    const now = Date.now();
-    const DOUBLE_TAP_DELAY = 300;
-    if (e.type === 'dblclick' || (now - lastTapTime.current < DOUBLE_TAP_DELAY)) {
+
+    // Desktop: Single Click to Reveal
+    if (e.type === 'click') {
       setIsRevealed(true);
       setTimeout(() => setIsRevealed(false), 5000);
+      return;
     }
-    lastTapTime.current = now;
+
+    // Mobile: Double Tap to Reveal
+    const now = Date.now();
+    const DOUBLE_TAP_DELAY = 300;
+    if (e.type === 'touchend') {
+      if (now - lastTapTime.current < DOUBLE_TAP_DELAY) {
+        setIsRevealed(true);
+        setTimeout(() => setIsRevealed(false), 5000);
+      }
+      lastTapTime.current = now;
+    }
   };
 
   return (
