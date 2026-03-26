@@ -13,18 +13,14 @@ function App() {
         setIsInteracted(true);
         window.removeEventListener('mousemove', handleFirstInteraction);
         window.removeEventListener('touchstart', handleFirstInteraction);
-        window.removeEventListener('touchmove', handleFirstInteraction);
       }
     };
 
     window.addEventListener('mousemove', handleFirstInteraction);
-    window.addEventListener('touchstart', handleFirstInteraction, { passive: true });
-    window.addEventListener('touchmove', handleFirstInteraction, { passive: true });
-
+    window.addEventListener('touchstart', handleFirstInteraction);
     return () => {
       window.removeEventListener('mousemove', handleFirstInteraction);
       window.removeEventListener('touchstart', handleFirstInteraction);
-      window.removeEventListener('touchmove', handleFirstInteraction);
     };
   }, [isInteracted]);
 
@@ -40,7 +36,7 @@ function App() {
 
   return (
     <div
-      className="min-h-screen bg-black flex flex-col items-center justify-center relative overflow-hidden px-4 selection:bg-neon-blue selection:text-white"
+      className="fixed inset-0 bg-black flex flex-col items-center justify-center overflow-hidden px-4 selection:bg-neon-blue selection:text-white touch-none"
       onClick={handleGlobalClick}
     >
 
