@@ -23,4 +23,17 @@
   .radial-gradient-bg {
     background: radial-gradient(circle at center, rgba(0, 240, 255, 0.1) 0%, rgba(0, 0, 0, 1) 70%);
   }
+
+  /* Screen reader only - for AIO Optimization */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
 }

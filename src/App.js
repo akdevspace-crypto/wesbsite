@@ -19,7 +19,7 @@ const Footer = () => (
       ARTIBOTS is an Artificial Intelligence and Robotics company that develops intelligent systems, automation platforms, and advanced robotics technologies.
     </p>*/}
     <p className="text-white/30 text-[9px] md:text-xs tracking-widest uppercase">
-      © 2025 ARTIBOTS INNOVATION PRIVATE LIMITED | Founded by ARUN JETLY | www.artibots.in
+      © 2025 ARTIBOTS INNOVATION PRIVATE LIMITED
     </p>
   </footer>
 );
