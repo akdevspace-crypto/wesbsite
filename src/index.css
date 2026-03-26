@@ -4,8 +4,10 @@
 
 @layer base {
   body {
-    @apply bg-black text-silver-white font-orbitron overflow-x-hidden;
+    @apply h-full overflow-hidden overscroll-none font-orbitron;
+    background: black;
     margin: 0;
+    touch-action: none;
   }
 }
 
