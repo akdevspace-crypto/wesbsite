@@ -12,7 +12,7 @@ const About = () => {
                     className="flex flex-col items-center space-y-6"
                 >
                     <img
-                        src="/logo.png"
+                        src="/logo.svg"
                         alt="ARTIBOTS Logo"
                         className="w-[80px] h-[80px] md:w-[100px] md:h-[100px]"
                     />

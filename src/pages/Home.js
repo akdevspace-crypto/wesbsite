@@ -47,7 +47,7 @@ const Home = ({ isInteracted, isRevealed, handleRevealInitiation }) => {
                         className="flex flex-col items-center space-y-6"
                     >
                         <img
-                            src="/logo.png"
+                            src="/logo.svg"
                             alt="ARTIBOTS Logo - Artificial Intelligence & Robotics"
                             className="w-[110px] h-[110px] md:w-[130px] md:h-[130px]"
                         />
