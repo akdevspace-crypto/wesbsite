@@ -35,8 +35,8 @@ const Home = ({ isInteracted, isRevealed, handleRevealInitiation }) => {
             <div className="fixed inset-0 bg-black z-0 pointer-events-none" />
 
             <main
-                className="relative w-full max-w-4xl flex flex-col items-center z-10 text-center space-y-6 md:space-y-12 py-12 md:py-20"
-                onDoubleClick={handleRevealInitiation}
+                className="relative w-full max-w-4xl flex flex-col items-center z-10 text-center space-y-6 md:space-y-12 py-12 md:py-20 cursor-pointer"
+                onClick={handleRevealInitiation}
                 onTouchEnd={handleRevealInitiation}
             >
                 <header>
